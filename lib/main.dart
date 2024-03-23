@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const _CaptchaTypingScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -88,45 +90,74 @@ class _CaptchaTypingScreenState extends State<_CaptchaTypingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Captcha Typing'),
+        title: Text(
+          'Captcha Typing',
+          style: GoogleFonts.headlandOne(color: Colors.white, fontSize: 15),
+        ),
         centerTitle: true,
+        backgroundColor: Colors.black87,
       ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(16.0, 60.0, 16.0, 40.0), // Add margins
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage('https://www.pixel4k.com/wp-content/uploads/2019/10/super-mario-nintendo_1572370059.jpg'), // Replace 'background_image.jpg' with your image asset path
+            fit: BoxFit.cover, // Adjust the fit as needed
+          ),
+        ),
+        padding: const EdgeInsets.fromLTRB(40.0, 40.0, 40.0, 30.0), // Add margins
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-                generatedCode,
-                style: const TextStyle(fontSize: 50.0),
-              ),
+              generatedCode,
+              style: GoogleFonts.pressStart2p(color: Colors.white, fontSize: 35),
+            ),
             const SizedBox(height: 5.0), // Add some space between generated code and header line
             const Divider(
-              color: Colors.black,
+              color: Colors.white,
             ), // Add a divider as a header line
-            const SizedBox(height: 10.0), // Add some space between header line and "Group D" text
-            const Text(
+            const SizedBox(height: 5.0), // Add some space between header line and "Group D" text
+            Text(
               'Group D',
-              style: TextStyle(fontSize: 20.0),
+              style: GoogleFonts.playfair(fontSize: 20.0, color: Colors.white70),
             ),
-            const SizedBox(height: 20.0),
+            const SizedBox(height: 10.0),
             Expanded(
               child: Center(
-                child: TextField(
-                  controller: _textEditingController,
-                  textAlign: TextAlign.center,
-                  decoration: const InputDecoration(
-                    hintText: 'Enter the code',
-                    border: OutlineInputBorder(), // Add borders around the TextField
-                    contentPadding: EdgeInsets.all(10.0), // Add padding inside the TextField
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 20.0), // Adjust the bottom padding as needed
+                  child: TextField(
+                    controller: _textEditingController,
+                    textAlign: TextAlign.center,
+                    textAlignVertical: TextAlignVertical.center,
+                    style: GoogleFonts.play(color: Colors.black, fontSize: 17.5),
+                    decoration: InputDecoration(
+                      hintText: 'Enter the code',
+                      hintStyle: const TextStyle(color: Colors.black),
+                      filled: true,
+                      fillColor: Colors.lightGreen,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0), // Set border radius here
+                        borderSide: const BorderSide(color: Colors.white),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0), // Set border radius here
+                        borderSide: const BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0), // Set border radius here
+                        borderSide: const BorderSide(color: Colors.white),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0), // Adjust padding here
+                    ),
+                    onChanged: (value) {
+                      // You can perform validation here if needed
+                    },
                   ),
-                  onChanged: (value) {
-                    // You can perform validation here if needed
-                  },
                 ),
               ),
             ),
-            const SizedBox(height: 20.0),
+            const SizedBox(height: 10.0),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
